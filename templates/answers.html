@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>人民日报信息抽取结果</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link href="static/assets/img/favicon.png" rel="icon">
+  <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
+    rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <header id="header" class="fixed-top">
+    <div class="container">
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="/"><span>信息抽取系统</span></a></h1>
+      </div>
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li><a href="/">首页</a></li>
+          <li class="active"><a href="/results">抽取结果</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="main-content">
+    <section class="results-section">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="page-title">人民日报信息抽取结果</h1>
+          <p class="page-subtitle">Named Entity Recognition Results from People's Daily News</p>
+        </div>
+
+        <div class="results-container">
+          <div class="table-responsive">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th class="col-date">发布时间</th>
+                  <th class="col-title">新闻标题</th>
+                  <th class="col-entity">人名</th>
+                  <th class="col-entity">地名</th>
+                  <th class="col-entity">机构名</th>
+                  <th class="col-entity">专有名词</th>
+                  <th class="col-summary">智能摘要</th>
+                  <th class="col-rating">准确性评价</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for new in news %}
+                <tr class="result-row">
+                  <td class="date-cell">{{new[0]}}年{{new[1]}}月{{new[2]}}日</td>
+                  <td class="title-cell">{{new[3]}}</td>
+                  <td class="entity-cell">{{new[4]}}</td>
+                  <td class="entity-cell">{{new[5]}}</td>
+                  <td class="entity-cell">{{new[6]}}</td>
+                  <td class="entity-cell">{{new[7]}}</td>
+                  <td class="summary-cell">{{new[9]}}</td>
+                  <td class="rating-cell">
+                    <div class="rating-group">
+                      <label class="rating-option">
+                        <input type="radio" name="rating_{{loop.index}}" value="准确">
+                        <span class="checkmark accurate"></span>
+                        准确
+                      </label>
+                      <label class="rating-option">
+                        <input type="radio" name="rating_{{loop.index}}" value="不准确">
+                        <span class="checkmark inaccurate"></span>
+                        不准确
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="static/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+  <script src="static/assets/vendor/venobox/venobox.min.js"></script>
+  <script src="static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="static/assets/vendor/counterup/counterup.min.js"></script>
+  <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="static/assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>
+
+<style>
+  :root {
+    --primary-color: #1e40af;
+    --secondary-color: #3b82f6;
+    --accent-color: #ef4444;
+    --success-color: #10b981;
+    --background-color: #f8fafc;
+    --text-color: #1f2937;
+    --border-color: #e5e7eb;
+    --card-bg: #ffffff;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-color);
+    background: var(--background-color);
+    padding-top: 80px;
+  }
+
+  #header {
+    background: white;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s;
+    padding: 15px 0;
+  }
+
+  #header .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  #header .logo h1 a,
+  #header .logo h1 a:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
+  .nav-menu a {
+    color: var(--text-color);
+    padding: 10px 15px;
+    transition: 0.3s;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .nav-menu a:hover,
+  .nav-menu .active>a {
+    color: var(--secondary-color);
+  }
+
+  .main-content {
+    min-height: 100vh;
+    padding: 40px 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+
+  .page-subtitle {
+    font-size: 1.2rem;
+    color: #6b7280;
+    margin-bottom: 0;
+  }
+
+  .results-container {
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+  }
+
+  .results-table thead {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  }
+
+  .results-table th {
+    padding: 20px 15px;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    border: none;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .results-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+  }
+
+  .results-table tbody tr:hover {
+    background-color: #f8fafc;
+  }
+
+  .results-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .results-table td {
+    padding: 15px;
+    border: none;
+    vertical-align: top;
+  }
+
+  .col-date {
+    width: 12%;
+  }
+
+  .col-title {
+    width: 20%;
+  }
+
+  .col-entity {
+    width: 10%;
+  }
+
+  .col-summary {
+    width: 25%;
+  }
+
+  .col-rating {
+    width: 13%;
+  }
+
+  .date-cell {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 14px;
+  }
+
+  .title-cell {
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 300px;
+    word-wrap: break-word;
+  }
+
+  .entity-cell {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4b5563;
+    max-width: 120px;
+    word-wrap: break-word;
+  }
+
+  .summary-cell {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #1f2937;
+    font-weight: 500;
+    max-width: 200px;
+    word-wrap: break-word;
+    background-color: #f0f9ff;
+    border-left: 3px solid var(--primary-color);
+  }
+
+  .rating-cell {
+    text-align: center;
+  }
+
+  .rating-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rating-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+
+  .rating-option:hover {
+    color: var(--primary-color);
+  }
+
+  .rating-option input[type="radio"] {
+    display: none;
+  }
+
+  .checkmark {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s;
+  }
+
+  .checkmark.accurate {
+    border-color: var(--success-color);
+  }
+
+  .checkmark.inaccurate {
+    border-color: var(--accent-color);
+  }
+
+  .rating-option input[type="radio"]:checked+.checkmark.accurate {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+  }
+
+  .rating-option input[type="radio"]:checked+.checkmark.inaccurate {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+
+  .rating-option input[type="radio"]:checked+.checkmark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: white;
+  }
+
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .results-table th,
+    .results-table td {
+      padding: 10px 8px;
+      font-size: 13px;
+    }
+
+    .rating-group {
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .rating-option {
+      font-size: 12px;
+    }
+  }
+
+  .back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 15px;
+    z-index: 996;
+    background: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    transition: all 0.4s;
+  }
+
+  .back-to-top i {
+    font-size: 28px;
+    color: #fff;
+    line-height: 0;
+  }
+
+  .back-to-top:hover {
+    background: var(--secondary-color);
+    color: #fff;
+  }
+
+  .back-to-top.active {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
